@@ -29,9 +29,10 @@ xxx$ cd ..
 xxx$ sudo vim /etc/ssh/sshd_config.d/xxx_sshd_config.conf
 ```
 
-```INI
+```diff
 #D Port 22
-Port 49152
+-Port 49152
++Port 55522
 ```
 
 変更できるポート番号は22または49152から65535までとなっています。
@@ -39,11 +40,6 @@ Port 49152
 それ以外も設定はできますが、他のサービスとバッティングするかもしれません。
 
 *注 ) ここで設定している55522はサンプルです。
-
-```INI
-#D Port 22
-Port 55522
-```
 
 ## SSHのリロード
 
