@@ -1,5 +1,5 @@
 # OpenSSH 8.9 Configuration for Ubuntu22
-#@ ver 0.11
+#@ ver 0.12
 
 #@ このファイルは設定ファイルのため著作権、ライセンスはありません。
 #@ OpenSSH のライセンスは [OpenSSH Project History](https://www.openssh.com/history.html)でご確認ください。
@@ -80,11 +80,10 @@ PubkeyAcceptedKeyTypes ssh-ed25519-cert-v01@openssh.com,ssh-ed25519
 
 
 ### host key signature algorithms
-HostKeyAlgorithms ssh-ed25519-cert-v01@openssh,ssh-ed25519
+HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-ed25519
 
 #D HostKey /etc/ssh/ssh_host_ed25519_key
 HostKey /etc/ssh/ssh_host_ed25519_key
-
 
 
 ## Cryptography 
