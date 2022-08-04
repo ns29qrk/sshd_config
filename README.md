@@ -7,15 +7,15 @@ version 0.1
 
 xxxは任意で変更してください
 
-```console
+```Shell
 ~$ mkdir xxx
 ~$ cd xxx
-xxx$ git clone https://github.com/ns29qrk/sshd_config.git
+xxx$ git clone https://github.com/ns29qrk/sshd_config.git .
 ```
 
 ## sshd_confingをsshd_config.dにコピー
 
-```console
+```Shell
 xxx$ cp sshd_config /etc/ssh/sshd_config.d/xxx_sshd_config.conf
 xxx$ cd ..
 ~$ rm ./xxx_sshd_config
@@ -23,7 +23,7 @@ xxx$ cd ..
 
 ## SSHのリロード
 
-```console
+```Shell
 ~$ sudo systemctl restart sshd
 ```
 
