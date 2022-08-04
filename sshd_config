@@ -1,5 +1,5 @@
 # OpenSSH 8.9 Configuration for Ubuntu22
-#@ ver 0.12
+#@ ver 0.13
 
 #@ このファイルは設定ファイルのため著作権、ライセンスはありません。
 #@ OpenSSH のライセンスは [OpenSSH Project History](https://www.openssh.com/history.html)でご確認ください。
@@ -119,13 +119,6 @@ MaxSessions 6
 #D Compression no
 Compression yes
 
-### 圧縮のレベル
-#@ sftpで扱うデータの殆どはすでに圧縮済み。
-#@ テキストを軽く圧縮するぐらいで良いかと。
-#D CompressionLevel 6
-CompressionLevel 4
-
-
 ### .rhostsおよび.shosts ファイルを無視
 #@ セキュリティ的には非常にやばい設定で万一デフォルト値が
 #@ 変わると痛い目を見る。確実に設定するため明示的に宣言を記述
@@ -187,9 +180,3 @@ PermitTunnel no
 
 # message of the day
 PrintMotd no
-
-# known_hotss のハッシュ化
-HashKnownHosts no
-
-# DNSキャッシュポイズニング防止
-CheckHostIP yes
