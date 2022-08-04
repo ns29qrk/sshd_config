@@ -48,8 +48,7 @@ Port 55522
 ## SSHのリロード
 
 ```Shell
-~$ sudo systemctl restart sshd
-sudo systemctl restart sshd.service
+~$ sudo systemctl restart sshd.service
 ```
 
 ## 更新履歴
