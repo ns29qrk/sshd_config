@@ -1,5 +1,5 @@
 # OpenSSH 8.9 Configuration for Ubuntu22
-#@ ver 0.1.4
+#@ ver 0.1.5
 
 #@ このファイルは設定ファイルのため著作権、ライセンスはありません。
 #@ OpenSSH のライセンスは [OpenSSH Project History](https://www.openssh.com/history.html)でご確認ください。
@@ -13,8 +13,10 @@ Protocol 2
 ### ポートとIP制限
 #@ port22の使用は侵入者の攻撃回数を増やすことになります。
 #@ port22の変更は侵入者への抑止力であり完全に防ぐものではありません。
+#@ ポート番号を変更する場合は
+#@ 22または49152から65535までの番号を選択してください。
 #D Port 22
-Port 10911
+Port 49152
 
 #E ListenAddress 0.0.0.0
 #E ListenAddress ::
