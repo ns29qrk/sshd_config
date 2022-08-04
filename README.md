@@ -30,9 +30,13 @@ sudo systemctl restart sshd.service
 
 ## 更新履歴
 version 0.1.4   Subsystem Sftpコメントアウト
-version 0.1.3   CompressionLevel削除
-                HashKnownHosts削除
-                CheckHostIP削除
+
+version 0.1.3   CompressionLevel削除  
+                HashKnownHosts削除  
+                CheckHostIP削除  
+
 version 0.1.2   HostKeyAlgorithmsの修正
+
 version 0.1.1   PubkeyAcceptedKeyTypesの修正
+
 version 0.1.0   初稿
