@@ -29,7 +29,7 @@ sudo systemctl restart sshd.service
 ```
 
 ## 更新履歴
-version 0.1.3   Subsystem Sftpコメントアウト
+version 0.1.4   Subsystem Sftpコメントアウト
 version 0.1.3   CompressionLevel削除
                 HashKnownHosts削除
                 CheckHostIP削除
