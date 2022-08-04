@@ -26,7 +26,7 @@ xxx$ cd ..
 必要がれば「Port 49152」を変更してください。
 
 ```Shell
-xxx$ sudo vim /etc/ssh/sshd_config.d/xxx_sshd_config.conf
+~$ sudo vim /etc/ssh/sshd_config.d/xxx_sshd_config.conf
 ```
 
 ```diff
