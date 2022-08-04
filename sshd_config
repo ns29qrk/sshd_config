@@ -1,5 +1,5 @@
 # OpenSSH 8.9 Configuration for Ubuntu22
-#@ ver 0.13
+#@ ver 0.1.3
 
 #@ このファイルは設定ファイルのため著作権、ライセンスはありません。
 #@ OpenSSH のライセンスは [OpenSSH Project History](https://www.openssh.com/history.html)でご確認ください。
