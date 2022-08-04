@@ -1,5 +1,5 @@
 # OpenSSH 8.9 Configuration for Ubuntu22
-#@ ver 0.1
+#@ ver 0.11
 
 #@ このファイルは設定ファイルのため著作権、ライセンスはありません。
 #@ OpenSSH のライセンスは [OpenSSH Project History](https://www.openssh.com/history.html)でご確認ください。
@@ -73,7 +73,7 @@ PubkeyAuthentication no
 #@  passphrase: -P "blahblahblah"
 #@  filename:   -f "authorized_keys"
 #D PubkeyAcceptedKeyTypes ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-dss-cert-v01@openssh.com,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,ssh-ed25519,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-dss
-PubkeyAcceptedKeyTypes ssh-ed25519-cert-v01@openssh,ssh-ed25519
+PubkeyAcceptedKeyTypes ssh-ed25519-cert-v01@openssh.com,ssh-ed25519
 
 ### pubickey filename
 #D AuthorizedKeysFile     .ssh/authorized_keys
