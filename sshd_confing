@@ -1,0 +1,196 @@
+# OpenSSH 8.9 Configuration for Ubuntu22
+#@ ver 0.1
+
+#@ このファイルは設定ファイルのため著作権、ライセンスはありません。
+#@ OpenSSH のライセンスは [OpenSSH Project History](https://www.openssh.com/history.html)でご確認ください。
+#@ この設定ファイルを使用した結果、不具合、損害等不利益が発生しても当方は一切の責任を負いません。
+
+## 通信手段関連
+
+### SSHプロトコルバージョン
+Protocol 2
+
+### ポートとIP制限
+#@ port22の使用は侵入者の攻撃回数を増やすことになります。
+#@ port22の変更は侵入者への抑止力であり完全に防ぐものではありません。
+#D Port 22
+Port 10911
+
+#E ListenAddress 0.0.0.0
+#E ListenAddress ::
+
+### IPのバージョンを指定して通信する
+#E AddressFamily inet
+#E AddressFamily inet6
+
+
+## ログイン関連
+
+
+### ユーザー、グループでのアクセス制限
+#E AllowGroups xxx
+#E AllowUsers xxx
+
+### root でのログインの可否
+#D PermitRootLogin yes
+#D PermitEmptyPasswords no
+PermitRootLogin no
+
+# SSHコマンド入力後ログインするまでの時間
+#D Logingracetime 120
+LoginGraceTime 20
+
+### ログイン認証の種類(二要素認証可)
+#@ "publickey,password,keyboard-interactive,gssapi-keyex,gssapi-with-mic,hostbased,none"
+#D AuthenticationMethods any
+#E AuthenticationMethods publickey,password
+AuthenticationMethods password
+
+### パスワードでのログインを許可
+#D PasswordAuthentication yes
+
+### PAMの利用
+#D UsePAM no
+
+### キーボード対話型認証(PAM用)
+#D kbdinteractiveauthentication yes
+KbdInteractiveAuthentication no
+
+### 認証できる回数
+#@ 無限認証失敗を防止
+#D MaxAuthTries 6
+MaxAuthTries 3
+
+### 公開鍵での認証
+#D PubkeyAuthentication yes
+PubkeyAuthentication no
+
+### 公開鍵の暗号化アルゴリズムの指定
+#@ EdDSA(ed25519) に固定してます。
+#@ ssh-keygen -t ed25519 
+#@ ssh-keygen options 
+#@  comment:    -C "my machine" 
+#@  passphrase: -P "blahblahblah"
+#@  filename:   -f "authorized_keys"
+#D PubkeyAcceptedKeyTypes ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-dss-cert-v01@openssh.com,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,ssh-ed25519,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-dss
+PubkeyAcceptedKeyTypes ssh-ed25519-cert-v01@openssh,ssh-ed25519
+
+### pubickey filename
+#D AuthorizedKeysFile     .ssh/authorized_keys
+
+
+### host key signature algorithms
+HostKeyAlgorithms ssh-ed25519-cert-v01@openssh,ssh-ed25519
+
+#D HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+
+
+
+## Cryptography 
+
+
+### 通信暗号化アルゴリズム
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+
+### メッセージ認証暗号化アルゴリズム
+MACs hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,umac-128-etm@openssh.com
+
+### 鍵を安全に配送するための鍵交換アルゴリズム
+#D KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group-exchange-sha1,diffie-hellman-group14-sha256,diffie-hellman-group14-sha1,diffie-hellman-group1-sha1
+KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256
+
+
+## Connection Preferences
+
+
+### 接続を続けるための応答確認をする時間
+#D ClientAliveInterval 0
+ClientAliveInterval 300
+
+### 応答確認できなかったときに何度繰り返すか
+#D ClientAliveCountMax 2
+ClientAliveCountMax 2
+
+### 最大接続数
+#D MaxSessions 10
+MaxSessions 6
+
+### 通信時にデータを圧縮
+#D Compression no
+Compression yes
+
+### 圧縮のレベル
+#@ sftpで扱うデータの殆どはすでに圧縮済み。
+#@ テキストを軽く圧縮するぐらいで良いかと。
+#D CompressionLevel 6
+CompressionLevel 4
+
+
+### .rhostsおよび.shosts ファイルを無視
+#@ セキュリティ的には非常にやばい設定で万一デフォルト値が
+#@ 変わると痛い目を見る。確実に設定するため明示的に宣言を記述
+#D IgnoreRhosts yes
+IgnoreRhosts yes
+
+### ログの出力レベル
+#D LogLevel INFO
+LogLevel VERBOSE
+#D SyslogFacility AUTH
+SyslogFacility AUTHPRIV
+
+### SSHの外部システムを構成
+#@ 主にSFTPに使われます。
+#E Subsystem sftp /usr/lib/openssh/sftp-server
+#E Subsystem sftp /usr/libexec/openssh/sftp-server
+Subsystem sftp internal-sftp
+
+
+# DNEへの問い合わせ
+# yesの場合ポート53を開放する必要がある。
+# UseDNS yes
+UseDNS no
+
+
+## 機能
+
+
+### 受け取れる環境変数
+AcceptEnv LANG 
+AcceptEnv LC_*
+AcceptEnv LANGUAGE
+AcceptEnv XMODIFIERS
+
+# X11 転送の許可
+X11Forwarding no
+
+### ssh-agent の許可
+AllowAgentForwarding no
+
+# ポート転送の許可
+# **please be aware that disabling TCP forwarding does not prevent port forwarding**
+# any user with an interactive login shell can spin up his/her own instance of sshd
+AllowTcpForwarding no
+
+# StreamLocal転送の許可
+AllowStreamLocalForwarding no
+
+# X11、 ssh-agent、TCP、StreamLocal の転送を一括で禁止する。
+# 各々の転送設定を上書きします。
+DisableForwarding yes
+
+# ポート中継の許可
+#@ このsshdに接続してるAとBのPCを中継する
+GatewayPorts no
+
+# トンネリングの許可
+PermitTunnel no
+
+# message of the day
+PrintMotd no
+
+# known_hotss のハッシュ化
+HashKnownHosts no
+
+# DNSキャッシュポイズニング防止
+CheckHostIP yes
